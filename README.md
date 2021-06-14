@@ -1,46 +1,89 @@
-# Getting Started with Create React App
+## Jira Project
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+### Config project coding environment
 
-## Available Scripts
+所有的字体和图片都放入到 src 文件夹中
 
-In the project directory, you can run:
+1.设置路径引用
+in tsconfig.json
+`"baseUrl": "./src", // config the absolute path as src`
 
-### `yarn start`
+2.配置格式化
+` yarn add --dev --exact prettier`
+`echo {}> .prettierrc.json`
+`touch .prettierignore`
+`npx mrm@2 lint-staged` 安装 git hooks
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+in package.json file
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+```
+"devDependencies": {
+    "husky": ">=6",
+    "lint-staged": ">=10",
+    "prettier": "2.3.0"
+  },
+  "lint-staged": {
+    "*.{js,css,md,ts,tsx}": "prettier --write"
+  }
+```
 
-### `yarn test`
+`yarn add eslint-config-prettier -D`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+in package.json
 
-### `yarn build`
+```
+"eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest",
+      "prettier"
+    ]
+  },
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+3.处理 commit 提交的格式
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+`yarn add @commitlint/config-conventional @commitlint/cli -D`
+`echo "module.exports = {extends: ['@commitlint/config-conventional']}" > commitlint.config.js`
+`npx husky add .husky/commit-msg "yarn commitlint --edit $1"`
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Config backend data
 
-### `yarn eject`
+Using 'json-server'
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+可以配置 RESTful API Server 自定义程度高，增删改查真实模拟，但是无法随着后端 API 的修改而自动修改。
+`npm i -g json-server`
+`json-server --watch db.json`
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+add 'db.json'
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+在项目中配置 json-server
+`yarn add -D json-server`
+`mkdir __json_server_mock__`
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+in 'package.json'
 
-## Learn More
+```
+"json-server": "json-server __json_server_mock__/db.json --watch"
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### Coding Project
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+#### Set BackEnd Url
+
+add files of '.env' and '.env.development'
+coding `const apiUrl = process.env.REACT_APP_API_URL` in index.js
+
+will config .env on run `npm start` or config .env.development on run `npm run build` automatically.
+
+处理非 restful api
+
+鸭子类型：面向接口编程，而不是面向对象编程
+<<<<<<< HEAD
+
+安装服务端
+npx imooc-jira-tool
+npx msw init public
+=======
+
+> > > > > > > 8edb222cd92c59203212c7c77c28aea3d369adf4
