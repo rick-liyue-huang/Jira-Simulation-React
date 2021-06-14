@@ -1,7 +1,19 @@
 import * as React from "react";
-import { useState } from "react";
+import { User } from "./search-panel";
 
-export const List = ({ users, list }) => {
+interface Project {
+  id: string;
+  name: string;
+  personId: string;
+  pin: boolean;
+  organization: string;
+}
+
+interface LisPropTypes {
+  users: User[];
+  list: Project[];
+}
+export const List: React.FC<LisPropTypes> = ({ users, list }) => {
   return (
     <table>
       <thead>
