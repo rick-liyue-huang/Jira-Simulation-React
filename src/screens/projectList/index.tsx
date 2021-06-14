@@ -8,7 +8,7 @@ import { clearObject } from "../../utils";
 
 const apiURL = process.env.REACT_APP_API_URL;
 
-export const ProjectList = () => {
+export const ProjectListScreen = () => {
   const [param, setParam] = useState({
     name: "",
     personId: "",
