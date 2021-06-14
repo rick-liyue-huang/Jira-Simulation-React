@@ -1,6 +1,7 @@
 import * as React from "react";
+import { useState } from "react";
 
-export const List = () => {
+export const List = ({ users, list }) => {
   return (
     <table>
       <thead>
@@ -9,7 +10,17 @@ export const List = () => {
           <th>负责人</th>
         </tr>
       </thead>
-      <tbody></tbody>
+      <tbody>
+        {list.map((project) => (
+          <tr key={project.id}>
+            <td>{project.name}</td>
+            <td>
+              {users.find((user) => user.id === project.personId)?.name ||
+                "unknown"}
+            </td>
+          </tr>
+        ))}
+      </tbody>
     </table>
   );
 };
