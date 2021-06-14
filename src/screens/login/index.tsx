@@ -26,14 +26,14 @@ export const LoginScreen = () => {
   return (
     <form onSubmit={handleSubmit}>
       <div>
-        <label htmlFor="username">用户名</label>
+        <label htmlFor="username">username</label>
         <input type="text" id={"username"} />
       </div>
       <div>
-        <label htmlFor="password">密码</label>
+        <label htmlFor="password">password</label>
         <input type="password" id={"password"} />
       </div>
-      <button type={"submit"}>提交</button>
+      <button type={"submit"}>Login</button>
     </form>
   );
 };

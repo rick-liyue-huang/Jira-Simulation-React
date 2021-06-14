@@ -86,4 +86,4 @@ npx imooc-jira-tool
 npx msw init public
 =======
 
-> > > > > > > 8edb222cd92c59203212c7c77c28aea3d369adf4
+利用 jwt token 存储在 application/local storage
