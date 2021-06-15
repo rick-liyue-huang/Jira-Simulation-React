@@ -1,5 +1,6 @@
 import * as React from "react";
 import { User } from "./search-panel";
+import { Table } from "antd";
 
 interface Project {
   id: string;
@@ -15,7 +16,29 @@ interface LisPropTypes {
 }
 export const List: React.FC<LisPropTypes> = ({ users, list }) => {
   return (
-    <table>
+    <Table
+      pagination={false}
+      columns={[
+        {
+          title: "名称",
+          dataIndex: "name",
+          sorter: (a, b) => a.name.localeCompare(b.name),
+        },
+        {
+          title: "负责人",
+          render(value, project) {
+            return (
+              <span>
+                {users.find((user) => user.id === project.personId)?.name ||
+                  "unknown"}
+              </span>
+            );
+          },
+        },
+      ]}
+      dataSource={list}
+    />
+    /*<table>
       <thead>
         <tr>
           <th>项目名称</th>
@@ -33,6 +56,6 @@ export const List: React.FC<LisPropTypes> = ({ users, list }) => {
           </tr>
         ))}
       </tbody>
-    </table>
+    </table>*/
   );
 };

@@ -35,7 +35,7 @@ export const register = (data: { username: string; password: string }) => {
   return fetch(`${apiURL}/register`, {
     method: "POST",
     headers: {
-      "Content-Type": "application/register",
+      "Content-Type": "application/json",
     },
     body: JSON.stringify(data),
   }).then(async (res) => {

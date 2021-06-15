@@ -87,3 +87,12 @@ npx msw init public
 =======
 
 利用 jwt token 存储在 application/local storage
+
+// put it after loadDevTools
+import 'antd/dist/antd.less';
+
+use craco 自定义 antd
+yarn add @craco/craco
+yarn add craco-less
+
+修改 package.json 的 craco

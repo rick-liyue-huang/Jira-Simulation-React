@@ -5,6 +5,8 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { loadDevTools } from "jira-dev-tool";
 import { AppProviders } from "./context";
+// put it after loadDevTools
+import "antd/dist/antd.less";
 
 loadDevTools(() => {
   return ReactDOM.render(
