@@ -5,7 +5,7 @@ import { useAuth } from "../context/auth-context";
 const apiURL = process.env.REACT_APP_API_URL;
 
 export const RegisterScreen = () => {
-  const { register, user } = useAuth();
+  const { register } = useAuth();
 
   const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
