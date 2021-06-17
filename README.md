@@ -121,3 +121,10 @@ import {jsx} from '@emotion/react';
 
 添加处理时间的库
 yarn add dayjs
+
+处理后台的警告
+`yarn add jira-dev-tool@next`
+
+```
+import { DevTools, loadServer } from "jira-dev-tool";
+```
