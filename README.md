@@ -128,3 +128,7 @@ yarn add dayjs
 ```
 import { DevTools, loadServer } from "jira-dev-tool";
 ```
+
+在生产环境 处理边界错误
+
+参考 https://github.com/bvaughn/react-error-boundary

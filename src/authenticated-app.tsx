@@ -12,6 +12,7 @@ export const AuthenticatedApp = () => {
 
   return (
     <Container>
+      {/*这里是渲染错误 为了测试创建的错误边界*/}
       {/*{value.notExist}*/}
       <Header between={true}>
         <HeaderLeft gap={true}>

@@ -16,10 +16,11 @@ export const UnauthenticatedApp = () => {
       <Header />
       <Background />
       {/*这里手动抛出一个异常*/}
-      {/*<Button onClick={() => {*/}
-      {/*  throw new Error('点击抛出异常');*/}
-      {/*  }*/}
-      {/*}>抛出异常</Button>*/}
+      {/*这个是手动异常，我们创建的erroBoundary不会捕获这个异常*/}
+      {/*<Button onClick={() => {
+        throw new Error('点击抛出异常');
+        }
+      }>抛出异常</Button>*/}
       <ShadowCard>
         <Title>{isRegister ? "Register" : "Login"}</Title>
         {error ? (
