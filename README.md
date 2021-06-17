@@ -110,3 +110,14 @@ grid flex 应用场景 1.要考虑是一维布局还是二维布局，
 从内容出发用 flex，从布局出发用 grid
 
 自定义 sylted 组件，引入 props
+
+如果使用 emotion/react
+注意引入的方式
+
+```
+/** @jsxImportSource @emotion/react */
+import {jsx} from '@emotion/react';
+```
+
+添加处理时间的库
+yarn add dayjs

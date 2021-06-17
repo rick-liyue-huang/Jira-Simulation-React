@@ -1,5 +1,7 @@
+/** @jsxImportSource @emotion/react */
+import { jsx } from "@emotion/react";
 import * as React from "react";
-import { Input, Select } from "antd";
+import { Input, Select, Form } from "antd";
 
 export interface User {
   name: string;
@@ -22,33 +24,39 @@ export const SearchPanel: React.FC<SearchPanelPropTypes> = ({
   users,
 }) => {
   return (
-    <form>
-      <Input
-        type="text"
-        value={param.name}
-        onChange={(evt) =>
-          setParam({
-            ...param,
-            name: evt.target.value,
-          })
-        }
-      />
-      <Select
-        value={param.personId}
-        onChange={(value) =>
-          setParam({
-            ...param,
-            personId: value,
-          })
-        }
-      >
-        <Select.Option value="">负责人</Select.Option>
-        {users.map((user) => (
-          <Select.Option key={user.id} value={user.id}>
-            {user.name}
-          </Select.Option>
-        ))}
-      </Select>
+    <Form layout={"inline"} css={{ marginBottom: "2rem" }}>
+      <Form.Item>
+        <Input
+          placeholder={"项目名称"}
+          type="text"
+          value={param.name}
+          onChange={(evt) =>
+            setParam({
+              ...param,
+              name: evt.target.value,
+            })
+          }
+        />
+      </Form.Item>
+      <Form.Item>
+        <Select
+          value={param.personId}
+          onChange={(value) =>
+            setParam({
+              ...param,
+              personId: value,
+            })
+          }
+        >
+          <Select.Option value="">负责人</Select.Option>
+          {users.map((user) => (
+            <Select.Option key={user.id} value={user.id}>
+              {user.name}
+            </Select.Option>
+          ))}
+        </Select>
+      </Form.Item>
+
       {/*<select
         value={param.personId}
         onChange={(evt) =>
@@ -65,6 +73,6 @@ export const SearchPanel: React.FC<SearchPanelPropTypes> = ({
           </option>
         ))}
       </select>*/}
-    </form>
+    </Form>
   );
 };
