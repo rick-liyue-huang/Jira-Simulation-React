@@ -96,3 +96,7 @@ yarn add @craco/craco
 yarn add craco-less
 
 修改 package.json 的 craco
+
+安装 emotion
+
+`yarn add @emotion/react @emotion/styled`
