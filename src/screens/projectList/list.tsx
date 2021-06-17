@@ -1,6 +1,6 @@
 import * as React from "react";
 import { User } from "./search-panel";
-import { Table } from "antd";
+import { Table, TableProps } from "antd";
 import dayjs from "dayjs";
 
 interface Project {
@@ -12,13 +12,20 @@ interface Project {
   created: number;
 }
 
-interface LisPropTypes {
-  users: User[];
-  list: Project[];
+interface LisPropTypes extends TableProps<Project> {
+  users: User[]; // 这是额外添加的属性
+  // list: Project[];
 }
-export const List: React.FC<LisPropTypes> = ({ users, list }) => {
+
+// type PropTypes = Omit<LisPropTypes, 'users'>  这里就是 props
+export const List: React.FC<LisPropTypes> = ({
+  users,
+  /*list*/ ...props
+}: LisPropTypes) => {
   return (
     <Table
+      loading
+      rowKey={"id"}
       pagination={false}
       columns={[
         {
@@ -55,7 +62,8 @@ export const List: React.FC<LisPropTypes> = ({ users, list }) => {
           },
         },
       ]}
-      dataSource={list}
+      // dataSource={list}
+      {...props}
     />
     /*<table>
       <thead>
