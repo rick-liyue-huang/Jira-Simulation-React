@@ -4,6 +4,8 @@ import * as auth from "auth-providers";
 import { User } from "../screens/projectList/search-panel";
 import { http } from "../utils/http";
 import { useMount } from "../utils";
+import { useAsync } from "../utils/useAsync";
+import { FullPageErrorFallback, FullPageLoading } from "../components/lib";
 
 interface AuthForm {
   username: string;
@@ -34,17 +36,37 @@ const AuthContext = React.createContext<
 AuthContext.displayName = "AuthContext";
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
-  const [user, setUser] = useState<User | null>(null);
+  // const [user, setUser] = useState<User | null>(null);
   const login = (form: AuthForm) => auth.login(form).then(setUser); // 消参
   const register = (form: AuthForm) =>
     auth.register(form).then((user) => setUser(user));
   const logout = () => auth.logout().then(() => setUser(null));
 
+  const {
+    data: user,
+    error,
+    isLoading,
+    isIdle,
+    isError,
+    run,
+    setData: setUser,
+  } = useAsync<User | null>();
+
   // 页面加载的时候引入user token
   useMount(() => {
-    boostrapUser().then(setUser);
+    // boostrapUser().then(setUser);
+    run(boostrapUser());
   });
 
+  // 需要设置组件用来全局显示loading状态, 在处理刷新列表页面的时候
+  if (isIdle || isLoading) {
+    return <FullPageLoading />;
+  }
+
+  // 处理 me 接口有问题的时候，将错误信息显示在页面
+  if (isError) {
+    return <FullPageErrorFallback error={error} />;
+  }
   return (
     <AuthContext.Provider
       children={children}
