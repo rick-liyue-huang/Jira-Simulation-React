@@ -1,5 +1,7 @@
+/** @jsxImportSource @emotion/react */
+
 import React, { useEffect, useState } from "react";
-import { Select, Input } from "antd";
+import { Select, Input, Form } from "antd";
 
 export interface User {
   id: string;
@@ -26,9 +28,10 @@ export const SearchPanel: React.FC<SearchPanelProps> = ({
 }) => {
   // setParam(Object.assign({}, param, {name: evt.target.value}))
   return (
-    <form>
-      <div>
+    <Form layout={"inline"} css={{ marginBottom: "2rem" }}>
+      <Form.Item>
         <Input
+          placeholder={"项目名称"}
           type="text"
           value={param.name}
           onChange={(evt) =>
@@ -38,24 +41,26 @@ export const SearchPanel: React.FC<SearchPanelProps> = ({
             })
           }
         />
-      </div>
-      <Select
-        value={param.personId}
-        onChange={(value) =>
-          setParam({
-            ...param,
-            personId: value,
-          })
-        }
-      >
-        <Select.Option value={""}>负责人</Select.Option>
-        {users.map((user) => (
-          <Select.Option key={user.id} value={user.id}>
-            {user.name}
-          </Select.Option>
-        ))}
-      </Select>
-    </form>
+      </Form.Item>
+      <Form.Item>
+        <Select
+          value={param.personId}
+          onChange={(value) =>
+            setParam({
+              ...param,
+              personId: value,
+            })
+          }
+        >
+          <Select.Option value={""}>负责人</Select.Option>
+          {users.map((user) => (
+            <Select.Option key={user.id} value={user.id}>
+              {user.name}
+            </Select.Option>
+          ))}
+        </Select>
+      </Form.Item>
+    </Form>
   );
 };
 

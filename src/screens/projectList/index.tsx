@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import * as qs from "qs";
 import { useDebounce, cleanObject, useMount } from "../../util";
 import { useHttp } from "../../util/http";
+import styled from "@emotion/styled";
 
 const apiURL = process.env.REACT_APP_API_URL;
 
@@ -42,9 +43,14 @@ export const ProjectListScreen = () => {
   });
 
   return (
-    <div>
+    <Container>
+      <h1>项目列表</h1>
       <SearchPanel param={param} setParam={setParam} users={users} />
       <List list={list} users={users} />
-    </div>
+    </Container>
   );
 };
+
+const Container = styled.div`
+  padding: 3.2rem;
+`;
