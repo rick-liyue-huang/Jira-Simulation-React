@@ -9,6 +9,7 @@ import { Typography } from "antd";
 import { useAsync } from "../../util/use-async";
 import { useProjects } from "../../util/project";
 import { useUsers } from "../../util/user";
+import { Helmet } from "react-helmet";
 
 const apiURL = process.env.REACT_APP_API_URL;
 
@@ -62,6 +63,9 @@ export const ProjectListScreen = () => {
 
   return (
     <Container>
+      <Helmet>
+        <title>项目列表</title>
+      </Helmet>
       <h1>项目列表</h1>
       <SearchPanel param={param} setParam={setParam} users={users || []} />
       {/*<List /!*list={list}*!/ dataSource={list} users={users} />*/}
