@@ -69,3 +69,20 @@ export const useArray = <T>(initialArray: T[]) => {
     },
   };
 };
+
+// 第二种方法用来处理页面title
+export const useDocumentTitle = (title: string, keepOnUnmount = true) => {
+
+  const preTitle = document.title;
+  useEffect(() => {
+    document.title = title;
+  }, [title])
+
+  useEffect(() => {
+    return () => {
+      if (!keepOnUnmount) {
+        document.title = preTitle;
+      }
+    }
+  }, [])
+}

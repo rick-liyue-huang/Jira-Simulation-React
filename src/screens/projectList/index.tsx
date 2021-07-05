@@ -2,7 +2,7 @@ import { SearchPanel } from "./search-panel";
 import { List, Project } from "./list";
 import { useEffect, useState } from "react";
 import * as qs from "qs";
-import { useDebounce, cleanObject, useMount } from "../../util";
+import { useDebounce, cleanObject, useMount, useDocumentTitle } from "../../util";
 import { useHttp } from "../../util/http";
 import styled from "@emotion/styled";
 import { Typography } from "antd";
@@ -61,11 +61,13 @@ export const ProjectListScreen = () => {
     });*!/
   });*/
 
+  useDocumentTitle('项目列表', false);
+
   return (
     <Container>
-      <Helmet>
-        <title>项目列表</title>
-      </Helmet>
+      {/*<Helmet>*/}
+      {/*  <title>项目列表</title>*/}
+      {/*</Helmet>*/}
       <h1>项目列表</h1>
       <SearchPanel param={param} setParam={setParam} users={users || []} />
       {/*<List /!*list={list}*!/ dataSource={list} users={users} />*/}

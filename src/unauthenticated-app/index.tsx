@@ -7,6 +7,7 @@ import logo from "assets/logo.svg";
 import left from "assets/left.svg";
 import right from "assets/right.svg";
 import {Helmet} from "react-helmet";
+import { useDocumentTitle } from "../util";
 
 export const UnauthenticatedApp = () => {
   const [isRegister, setIsRegister] = useState(false);
@@ -14,12 +15,11 @@ export const UnauthenticatedApp = () => {
   //开始设置状态
   const [error, setError] = useState<Error | null>(null);
 
-
   return (
     <Container>
-      <Helmet>
-        <title>请登录或者注册</title>
-      </Helmet>
+      {/*<Helmet>*/}
+      {/*  <title>请登录或者注册</title>*/}
+      {/*</Helmet>*/}
       <Header />
       <Background />
       <ShadowCard>
