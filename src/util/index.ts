@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { users } from "jira-dev-tool/dist/server/initial-data";
 
 export const isFalsy = (value: unknown) => (value === 0 ? false : !value);
 export const isVoid = (value: unknown) =>
@@ -73,7 +74,11 @@ export const useArray = <T>(initialArray: T[]) => {
 // 第二种方法用来处理页面title
 export const useDocumentTitle = (title: string, keepOnUnmount = true) => {
 
-  const preTitle = document.title;
+  // 页面加载时候：preTitle === 'React App'
+  // 页面加载后：preTitle === title
+
+  // ref在整个生命周期都是保持不变的。这就相当于一个容器，从始至终保持不变。
+  const preTitle = useRef(document.title).current;
   useEffect(() => {
     document.title = title;
   }, [title])
@@ -84,5 +89,5 @@ export const useDocumentTitle = (title: string, keepOnUnmount = true) => {
         document.title = preTitle;
       }
     }
-  }, [])
+  }, [keepOnUnmount, preTitle])
 }
