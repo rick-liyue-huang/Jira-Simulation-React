@@ -6,6 +6,8 @@ import { LoginScreen } from "./screens/login";
 import { useAuth } from "./context/auth-context";
 import { AuthenticatedApp } from "./authenticated-app";
 import { UnauthenticatedApp } from "./unauthenticated-app";
+import { ErrorBoundary } from "./components/error-boundary";
+import { FullPageErrorFallback } from "./components/lib";
 
 function App() {
   const { user } = useAuth();
@@ -13,7 +15,9 @@ function App() {
     <div className="App">
       {/*<ProjectListScreen />*/}
       {/*<LoginScreen />*/}
-      {user ? <AuthenticatedApp /> : <UnauthenticatedApp />}
+      <ErrorBoundary fallbackRender={FullPageErrorFallback}>
+        {user ? <AuthenticatedApp /> : <UnauthenticatedApp />}
+      </ErrorBoundary>
     </div>
   );
 }
