@@ -12,9 +12,13 @@ const defaultInitialState: State<null> = {
   error: null
 };
 
+// 有的时候让抛出异常成为一个可选项
+const defaultConfig = {
+  throwOnError: false
+}
 
-
-export const useAsync = <T>(initialState?: State<T>) => {
+export const useAsync = <T>(initialState?: State<T>, initialConfig?: typeof defaultConfig) => {
+  const config = {...defaultConfig, ...initialConfig};
   const [state, setState] = useState<State<T>>({
     ...defaultInitialState,
     ...initialState
@@ -43,8 +47,12 @@ export const useAsync = <T>(initialState?: State<T>) => {
       return data;
     })
       .catch(error => {
+        // catch会消化异常，如果不主动抛出，外面是接收不到异常的。
         setError(error);
+        if (config.throwOnError)
+          return Promise.reject(error)
         return error;
+
       })
   }
   return {

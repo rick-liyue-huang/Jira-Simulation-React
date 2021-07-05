@@ -3,6 +3,8 @@ import * as auth from "auth-providers";
 import { User } from "../screens/projectList/search-panel";
 import { http } from "../util/http";
 import { useMount } from "../util";
+import { useAsync } from "../util/use-async";
+import { FullPageErrorFallback, FullPageLoading } from "../components/lib";
 
 interface AuthForm {
   username: string;
@@ -36,16 +38,30 @@ const AuthContext = React.createContext<
 AuthContext.displayName = "AuthContext";
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
-  const [user, setUser] = useState<User | null>(null);
+  // const [user, setUser] = useState<User | null>(null);
   const login = (form: AuthForm) =>
     auth.login(form).then((user) => setUser(user));
   const register = (form: AuthForm) => auth.register(form).then(setUser);
   const logout = () => auth.logout().then(() => setUser(null));
 
+  const {data: user, error, isLoading, isIdle, isError, setData: setUser, run} = useAsync<User | null>();
+
   //页面加载的时候，调用这个方法，保证处于登录状态，如果有token的话
   useMount(() => {
-    bootstrapUser().then(setUser);
+    // bootstrapUser().then(setUser);
+  //  通过useAsync重新定义
+    run(bootstrapUser());
   });
+
+  // 切换界面的时候处理loading
+  if (isIdle || isLoading) {
+    return <FullPageLoading />;
+  }
+
+  // 处理错误信息
+  if (isError) {
+    return <FullPageErrorFallback error={error} />
+  }
 
   return (
     <AuthContext.Provider

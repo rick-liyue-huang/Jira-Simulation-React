@@ -2,15 +2,24 @@ import React, { FormEvent } from "react";
 import { useAuth } from "../context/auth-context";
 import { Button, Form, Input } from "antd";
 import { LongButton } from "./index";
+import { useAsync } from "../util/use-async";
 
 const apiURL = process.env.REACT_APP_API_URL;
 
-export const LoginScreen = () => {
-  const { login, user } = useAuth();
+export const LoginScreen = ({onError}: {onError: (error: Error) => void}) => {
+  const { login } = useAuth();
+
+  // 将 useAsync应用到longin
+  const {run, isLoading} = useAsync(undefined, {throwOnError: true});
 
   // 因为使用了 antd，可以改变登录方法的定义
-  const handleSubmit = (values: { username: string; password: string }) => {
-    login(values);
+  const handleSubmit = async (values: { username: string; password: string }) => {
+    try {
+      // await login(values);
+      await run(login(values))
+    } catch (e) {
+      onError(e);
+    }
   };
   return (
     <Form onFinish={handleSubmit}>
@@ -27,7 +36,7 @@ export const LoginScreen = () => {
         <Input type="password" id={"password"} placeholder={"密码"} />
       </Form.Item>
       <Form.Item>
-        <LongButton type={"primary"} htmlType={"submit"}>
+        <LongButton loading={isLoading} type={"primary"} htmlType={"submit"}>
           登录
         </LongButton>
       </Form.Item>
