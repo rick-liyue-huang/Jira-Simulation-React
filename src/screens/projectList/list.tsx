@@ -1,8 +1,8 @@
 import { User } from "./search-panel";
-import { Table } from "antd";
+import { Table, TableProps } from "antd";
 import dayjs from "dayjs";
 
-interface Project {
+export interface Project {
   id: string;
   name: string;
   personId: string;
@@ -11,12 +11,12 @@ interface Project {
   created: number;
 }
 
-interface ListProps {
-  list: Project[];
+interface ListProps extends TableProps<Project> {
+  // list: Project[];
   users: User[];
 }
 
-export const List: React.FC<ListProps> = ({ users, list }) => {
+export const List: React.FC<ListProps> = ({ users/*, list*/, ...props }) => {
   return (
     <Table
       rowKey={"id"}
@@ -55,7 +55,8 @@ export const List: React.FC<ListProps> = ({ users, list }) => {
           },
         },
       ]}
-      dataSource={list}
+      // dataSource={list}
+      {...props}
     />
   );
 };
