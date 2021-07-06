@@ -1,3 +1,4 @@
+import './wdyr'; // 必须在第一句引用
 import React from "react";
 import ReactDOM from "react-dom";
 import App from "./App";

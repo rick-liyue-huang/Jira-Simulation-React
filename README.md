@@ -137,3 +137,6 @@ import { DevTools, loadServer } from "jira-dev-tool";
 关于配置 routes route 
 
 yarn add react-router react-router-dom history
+
+使用 yarn add --dev @welldone-software/why-did-you-render
+查找无限渲染的问题

@@ -11,14 +11,23 @@ import { useProjects } from "../../util/project";
 import { useUsers } from "../../util/user";
 import { Helmet } from "react-helmet";
 import {Test} from './test-closure';
+import { useUrlQueryParam } from "../../util/url";
 
 const apiURL = process.env.REACT_APP_API_URL;
 
 export const ProjectListScreen = () => {
-  const [param, setParam] = useState({
+  /*const [param, setParam] = useState({
     name: "",
     personId: "",
-  });
+  });*/
+
+  // console.log(useUrlQueryParam(["name"]));
+  // 因为使用了 useUrlQueryParam(), 所以param就可以从这里引入
+  // const [keys] = useState<('name' |  'personId')[]>(['name', 'personId']);
+  // const [param] = useUrlQueryParam(keys);
+
+  const [param, setParam] = useUrlQueryParam(['name', 'personId']);
+
   // const [users, setUsers] = useState([]);
   // const [list, setList] = useState([]);
   const debouncedParam = useDebounce(param, 2000);
@@ -62,7 +71,7 @@ export const ProjectListScreen = () => {
     });*!/
   });*/
 
-  useDocumentTitle('项目列表', false);
+  useDocumentTitle('项目列表', false)
 
   return (
     <Container>
@@ -80,6 +89,14 @@ export const ProjectListScreen = () => {
     </Container>
   );
 }
+
+// 开始追踪该组件引起的无限渲染
+ProjectListScreen.whyDidYouRender = true;
+
+//相当于
+/*class Test extends React.Component<any, any> {
+  static whyDidYouRender = true;
+}*/
 
 const Container = styled.div`
   padding: 3.2rem;
