@@ -10,7 +10,7 @@ import { useAsync } from "../../util/use-async";
 import { useProjects } from "../../util/project";
 import { useUsers } from "../../util/user";
 import { Helmet } from "react-helmet";
-import {Test} from './test';
+import {Test} from './test-closure';
 
 const apiURL = process.env.REACT_APP_API_URL;
 

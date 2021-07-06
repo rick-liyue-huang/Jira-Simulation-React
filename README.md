@@ -132,3 +132,8 @@ import { DevTools, loadServer } from "jira-dev-tool";
 在生产环境 处理边界错误
 
 参考 https://github.com/bvaughn/react-error-boundary
+
+
+关于配置 routes route 
+
+yarn add react-router react-router-dom history

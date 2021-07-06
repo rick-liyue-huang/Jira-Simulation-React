@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import { useMount } from "../../util";
 
-const test = () => {
+const testClosure = () => {
   let num = 0;
   const effect = () => {
     num += 1;
@@ -15,7 +15,7 @@ const test = () => {
 }
 
 // 执行test 返回effect函数
-const add = test();
+const add = testClosure();
 // 执行effect函数，返回引用了message1的unmount函数, 注意是不同的message
 const unmount = add();
 //再次执行effect函数，返回引用了message2的unmount函数
