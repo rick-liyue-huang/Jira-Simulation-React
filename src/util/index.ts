@@ -91,3 +91,6 @@ export const useDocumentTitle = (title: string, keepOnUnmount = true) => {
     }
   }, [keepOnUnmount, preTitle])
 }
+
+// 设置重置路由的方法到首页
+export const resetRoute = () => window.location.href = window.location.origin;
