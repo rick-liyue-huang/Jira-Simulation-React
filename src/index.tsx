@@ -1,23 +1,13 @@
-import './wdyr'; // 必须在第一句引用
 import React from "react";
 import ReactDOM from "react-dom";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-// import { loadDevTools } from "jira-dev-tool";
-import { AppProviders } from "./context";
-import { loadServer, DevTools } from "jira-dev-tool";
-import "antd/dist/antd.less";
 
-loadServer(() =>
-  ReactDOM.render(
-    <React.StrictMode>
-      <AppProviders>
-        <DevTools />
-        <App />
-      </AppProviders>
-    </React.StrictMode>,
-    document.getElementById("root")
-  )
+ReactDOM.render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>,
+  document.getElementById("root")
 );
 
 // If you want to start measuring performance in your app, pass a function
