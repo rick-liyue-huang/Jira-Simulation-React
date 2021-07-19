@@ -67,6 +67,17 @@ in 'package.json'
 "json-server": "json-server __json_server_mock__/db.json --watch"
 ```
 
+restfulAPI 的结构:
+GET /tickets // 列表
+GET /tickets/12 // 详情
+POST /tickets // 增加
+PUT /tickets/12 // 替换
+PATCH /tickets/12 // 修改
+DELETE /tickets/12 // 删除
+
+首先使用 jsons-server 得到 mock 数据
+'**json_server_mock**/db.json'
+
 ### Coding Project
 
 #### Set BackEnd Url
@@ -133,8 +144,7 @@ import { DevTools, loadServer } from "jira-dev-tool";
 
 参考 https://github.com/bvaughn/react-error-boundary
 
-
-关于配置 routes route 
+关于配置 routes route
 
 yarn add react-router react-router-dom history
 
